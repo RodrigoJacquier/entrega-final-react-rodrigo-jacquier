@@ -1,0 +1,24 @@
+import express from "express"
+import {
+    addProduct,
+    deleteProduct,
+    getAllProducts,
+    getProductById,
+    editProduct
+} from "../controllers/products.controllers.js"
+import { authentication } from "../midleware/authentication.js"
+
+const routes = express.Router();
+
+// Ruta para obtener todos los productos
+routes.get('/products', getAllProducts);
+
+routes.get('/products/:id', getProductById);
+
+routes.post("/products/create",authentication, addProduct)
+
+routes.delete("/products/:id",authentication, deleteProduct)
+
+routes.put("/products/:id", editProduct)
+
+export default routes;
